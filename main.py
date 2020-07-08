@@ -19,9 +19,9 @@ def parse_opts():
                       help='Patter for matching indices.')
     parser.add_option('-f', '--field', type='str', default='peer_id',
                       help='Name of the field to count.')
-    parser.add_option('-m', '--max-size', default=100000,
+    parser.add_option('-m', '--max-size', type='int', default=100000,
                       help='Max number of counts to find.')
-    parser.add_option('-d', '--image-dpi', default=200,
+    parser.add_option('-d', '--image-dpi', type='int', default=200,
                       help='DPI of generated PNG images.')
     parser.add_option('-o', '--output-dir', default='./',
                       help='Dir into which images are generated.')
