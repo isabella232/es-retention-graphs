@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from os import path
 from optparse import OptionParser
 
 from query import ESQueryPeers
@@ -22,6 +23,8 @@ def parse_opts():
                       help='Max number of counts to find.')
     parser.add_option('-d', '--image-dpi', default=200,
                       help='DPI of generated PNG images.')
+    parser.add_option('-o', '--output-dir', default='./',
+                      help='Dir into which images are generated.')
     (opts, args) = parser.parse_args()
 
     if not opts.field:
@@ -43,10 +46,12 @@ def main():
     pdg = PDGraphPeers(data)
 
     plot = pdg.days_per_peers()
-    plot.figure.savefig("days_per_peers.png", dpi=opts.image_dpi)
+    plot.figure.savefig(path.join(opts.output_dir, "days_per_peers.png"),
+                        dpi=opts.image_dpi)
 
     matrix = pdg.weekly_cohorts()
-    matrix.figure.savefig("weekly_cohorts.png", dpi=opts.image_dpi)
+    matrix.figure.savefig(path.join(opts.output_dir, "weekly_cohorts.png"),
+                          dpi=opts.image_dpi)
 
 
 if __name__ == '__main__':
