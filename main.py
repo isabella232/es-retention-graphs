@@ -38,9 +38,11 @@ def main():
 
     pdg = PDGraphPeers(data)
 
-    print(pdg.unique_peers_counts())
-    plot = pdg.number_of_days()
-    plot.savefig("output.png")
+    plot = pdg.days_per_peers()
+    plot.figure.savefig("days_per_peers.png")
+
+    matrix = pdg.weekly_cohorts()
+    matrix.figure.savefig("weekly_cohorts.png")
 
 if __name__ == '__main__':
     main()
