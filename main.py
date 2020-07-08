@@ -18,8 +18,10 @@ def parse_opts():
                       help='Patter for matching indices.')
     parser.add_option('-f', '--field', type='str', default='peer_id',
                       help='Name of the field to count.')
-    parser.add_option('-m', '--max-size', default=10000,
+    parser.add_option('-m', '--max-size', default=100000,
                       help='Max number of counts to find.')
+    parser.add_option('-d', '--image-dpi', default=200,
+                      help='DPI of generated PNG images.')
     (opts, args) = parser.parse_args()
 
     if not opts.field:
@@ -41,10 +43,10 @@ def main():
     pdg = PDGraphPeers(data)
 
     plot = pdg.days_per_peers()
-    plot.figure.savefig("days_per_peers.png")
+    plot.figure.savefig("days_per_peers.png", dpi=opts.image_dpi)
 
     matrix = pdg.weekly_cohorts()
-    matrix.figure.savefig("weekly_cohorts.png")
+    matrix.figure.savefig("weekly_cohorts.png", dpi=opts.image_dpi)
 
 
 if __name__ == '__main__':

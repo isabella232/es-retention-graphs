@@ -44,7 +44,7 @@ class PDGraphPeers():
 
         fig, ax = plt.subplots(1,
                                2,
-                               figsize=(12, 8),
+                               figsize=(20, 16),
                                sharey=True,
                                gridspec_kw={'width_ratios': [1, 11]})
 
