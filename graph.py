@@ -24,7 +24,7 @@ class PDGraphPeers():
             ylabel='# of peers')
         return ax
 
-    def weekly_cohorts(self):
+    def weekly_cohorts(self, figsize=(18, 14)):
         self.df['datetime'] = pd.to_datetime(self.df['Date'])
         self.df['week'] = self.df['datetime'].dt.to_period('W')
         self.df['month'] = self.df['datetime'].dt.to_period('M')
@@ -44,7 +44,7 @@ class PDGraphPeers():
 
         fig, ax = plt.subplots(1,
                                2,
-                               figsize=(20, 16),
+                               figsize=figsize,
                                sharey=True,
                                gridspec_kw={'width_ratios': [1, 11]})
 
