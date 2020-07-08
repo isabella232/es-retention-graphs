@@ -4,8 +4,9 @@ from optparse import OptionParser
 from query import ESQueryPeers
 from graph import PDGraphPeers
 
-HELP_DESCRIPTION='This generates a CSV with buckets of peer_ids for every day.'
-HELP_EXAMPLE='Example: ./unique_count.py -i "logstash-2019.11.*" -f peer_id'
+HELP_DESCRIPTION = 'This generates a CSV with buckets of peer_ids for every day.'
+HELP_EXAMPLE = 'Example: ./unique_count.py -i "logstash-2019.11.*" -f peer_id'
+
 
 def parse_opts():
     parser = OptionParser(description=HELP_DESCRIPTION, epilog=HELP_EXAMPLE)
@@ -23,8 +24,9 @@ def parse_opts():
 
     if not opts.field:
         parser.error('No field name specified!')
-    
+
     return (opts, args)
+
 
 def main():
     (opts, args) = parse_opts()
@@ -43,6 +45,7 @@ def main():
 
     matrix = pdg.weekly_cohorts()
     matrix.figure.savefig("weekly_cohorts.png")
+
 
 if __name__ == '__main__':
     main()
