@@ -6,7 +6,7 @@ from query import ESQueryPeers
 from graph import PDGraphPeers
 
 HELP_DESCRIPTION = 'This generates a CSV with buckets of peer_ids for every day.'
-HELP_EXAMPLE = 'Example: ./unique_count.py -i "logstash-2019.11.*" -f peer_id'
+HELP_EXAMPLE = 'Example: ./unique_count.py -i "logstash-2019.11.*" -f "peer_id"'
 
 
 def parse_opts():
@@ -19,6 +19,8 @@ def parse_opts():
                       help='Patter for matching indices.')
     parser.add_option('-f', '--field', type='str', default='peer_id',
                       help='Name of the field to count.')
+    parser.add_option('-F', '--fleet', type='str', default='eth.prod',
+                      help='Name of the fleet to query.')
     parser.add_option('-m', '--max-size', type='int', default=100000,
                       help='Max number of counts to find.')
     parser.add_option('-d', '--image-dpi', type='int', default=200,
@@ -41,7 +43,7 @@ def main():
     data = []
     for index in esq.get_indices(opts.index_pattern):
         print('Index: {}'.format(index))
-        data.extend(esq.get_peers(index, opts.field, opts.max_size))
+        data.extend(esq.get_peers(index, opts.field, opts.fleet, opts.max_size))
 
     pdg = PDGraphPeers(data)
 
